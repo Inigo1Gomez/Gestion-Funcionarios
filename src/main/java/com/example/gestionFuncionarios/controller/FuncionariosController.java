@@ -54,9 +54,9 @@ public class FuncionariosController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Funcionarios> actualizar(PathVariable Integer id, @RequestBody Funcionarios funcionarios) {
+    public ResponseEntity<Funcionarios> actualizar(@PathVariable Integer id, @RequestBody Funcionarios funcionarios) {
         try{
-            Funcionario fun = funcionariosService.findById(id);
+            Funcionarios fun = funcionariosService.findById(id);
             fun.setId(id);
             fun.setRun(funcionarios.getRun());
             fun.setNombreCompleto(funcionarios.getNombreCompleto());
