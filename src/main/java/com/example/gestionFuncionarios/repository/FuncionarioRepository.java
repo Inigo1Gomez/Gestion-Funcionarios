@@ -10,8 +10,8 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface FuncionarioRepository extends JpaRepository<Funcionarios, Long> {
     
-    List<Funcionarios> findByRol(String rol);
+    List<Funcionarios> findById(String id);
 
-    List<Funcionarios> findByNombreCompleto(String nombreCompleto);
+    List<Funcionarios> findByNombre(String nombre);
 
 }

@@ -5,8 +5,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Date;
-//ke
 @Entity
 @Table(name= "funcionario")
 @Data
@@ -18,24 +16,24 @@ public class Funcionarios {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(unique=true, length = 13, nullable=false)
+    @Column(unique=true, length = 8, nullable=false)
     private String run;
 
-    @Column(nullable=false)
-    private String nombreCompleto;
+    @Column(length = 1, nullable=false)
+    private String dv;
 
     @Column(nullable=false)
+    private String nombre;
+
+    @Column(nullable=false)
+    private String appaterno;
+
+    @Column(nullable=false)
+    private String apmaterno;
+
+    @Column
     private String correo;
 
-    @Column(nullable=false)
+    @Column
     private String telefono;
-
-    @Column(nullable=false)
-    private String rol;
-
-    @Column(nullable=false)
-    private String estado;
-
-    @Column(nullable=false)
-    private String fechaIngreso;
 }

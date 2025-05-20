@@ -59,12 +59,12 @@ public class FuncionariosController {
             Funcionarios fun = funcionariosService.findById(id);
             fun.setId(id);
             fun.setRun(funcionarios.getRun());
-            fun.setNombreCompleto(funcionarios.getNombreCompleto());
+            fun.setDv(funcionarios.getDv());
+            fun.setNombre(funcionarios.getNombre());
+            fun.setAppaterno(funcionarios.getAppaterno());
+            fun.setApmaterno(funcionarios.getApmaterno());
             fun.setCorreo(funcionarios.getCorreo());
             fun.setTelefono(funcionarios.getTelefono());
-            fun.setRol(funcionarios.getRol());
-            fun.setEstado(funcionarios.getEstado());
-            fun.setFechaIngreso(funcionarios.getFechaIngreso());
 
             funcionariosService.save(fun);
             return ResponseEntity.ok(funcionarios);
