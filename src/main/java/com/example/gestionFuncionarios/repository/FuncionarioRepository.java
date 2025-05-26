@@ -9,9 +9,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface FuncionarioRepository extends JpaRepository<Funcionarios, Long> {
-    
-    List<Funcionarios> findById(String id);
-
-    List<Funcionarios> findByNombre(String nombre);
 
 }
