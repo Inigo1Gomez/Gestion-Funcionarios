@@ -2,6 +2,10 @@ package com.example.gestionFuncionarios.controller;
 
 import com.example.gestionFuncionarios.model.Funcionarios;
 import com.example.gestionFuncionarios.service.FuncionariosService;
+
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,10 +20,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.hateoas.EntityModel;
 
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.*;
 
-
-
+@Tag(name = "Funcionarios", description = "Operaciones relacionadas con los funcionarios")
 @RestController
 @RequestMapping("/Gestion/Funcionarios")
 
@@ -28,6 +33,7 @@ public class FuncionariosController {
     @Autowired
     private FuncionariosService funcionariosService;
 
+    @Operation(summary = "reportes de Funcionarios",description = "reportes de funcionarios")
     @GetMapping
     public ResponseEntity<List<Funcionarios>> listar(){
             List<Funcionarios> funcionarios = funcionariosService.findAll();
@@ -44,11 +50,15 @@ public class FuncionariosController {
     }
     
     @GetMapping("/{id}")
-    public ResponseEntity<Funcionarios> buscar(@PathVariable Integer id) {
-        try{
-            Funcionarios funcionarios = funcionariosService.findById(id);
-            return ResponseEntity.ok(funcionarios);
-        } catch ( Exception e ){
+    public ResponseEntity<EntityModel<Funcionarios>> buscar(@PathVariable Integer id) {
+        try {
+            Funcionarios funcionario = funcionariosService.findById(id);
+            EntityModel<Funcionarios> resource = EntityModel.of(funcionario,
+                linkTo(methodOn(FuncionariosController.class).buscar(id)).withSelfRel(),
+                linkTo(methodOn(FuncionariosController.class).listar()).withRel("all-funcionarios")
+            );
+            return ResponseEntity.ok(resource);
+        } catch (Exception e) {
             return ResponseEntity.notFound().build();
         }
     }
